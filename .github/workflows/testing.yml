@@ -28,6 +28,7 @@ jobs:
         run: pip install -U coverage
       - name: "Run unittest"
         run: python -m unittest
+      - name: "Adding report to .converge"
         run: coverage -m pytest
         #retention-days: 1  
   coverage_report:
@@ -42,5 +43,6 @@ jobs:
         run: pip install -U coverage
       - name: "Run coverage"
         run: coverage report
+      - name: "Converting to xml"
         run: coverage xml
         #retention-days: 14
