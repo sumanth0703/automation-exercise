@@ -28,8 +28,8 @@ jobs:
         run: pip install -U coverage
       - name: "Run unittest"
         run: python -m unittest
-        run: coverage run -m pytest
-        retention-days: 1  
+        run: coverage -m pytest
+        #retention-days: 1  
   coverage_report:
     needs: test
     runs-on: ubuntu-latest
@@ -43,4 +43,4 @@ jobs:
       - name: "Run coverage"
         run: coverage report
         run: coverage xml
-        retention-days: 14
+        #retention-days: 14
