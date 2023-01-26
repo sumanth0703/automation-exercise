@@ -1,0 +1,46 @@
+name: Testing workflow
+
+on: [push, pull_request]
+
+jobs:
+  style_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: "Install style checker"
+        run: pip install black
+      - name: "Run style check"
+        run: black --check .
+  test:
+    needs: style_check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name : "Install pytest"
+        run: pip install -U pytest
+      - name : "Install coverage"
+        run: pip install -U coverage
+      - name: "Run unittest"
+        run: python -m unittest
+        run: coverage run -m pytest
+        retention-days: 1  
+  coverage_report:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name : "Install coverage"
+        run: pip install -U coverage
+      - name: "Run coverage"
+        run: coverage report
+        run: coverage xml
+        retention-days: 14
