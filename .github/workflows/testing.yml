@@ -29,13 +29,32 @@ jobs:
         run: pip install -U coverage
       - name: "Run pytest"
         run: python -m pytest
-      - name: "Run converge"
+      - name: "Run coverage"
         run: coverage run -m pytest
       - name: "Adding report to .coverage location"
         uses: actions/upload-artifact@v2
         with:
-          name: Coverage Report
+          name: Coverage-Report
           path: .coverage
           retention-days: 1
+  coverage_report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name : "Install coverage"
+        run: pip install -U coverage
+      - name: "Recover the coverage report from .coverage"
+        uses: actions/download-artifact@v2
+        with:
+          name: Coverage-Report
+          path: .coverage
+      - name: "Run coverage"    
+        run: coverage report
+      - name: "Converting to xml"
+        run: coverage xml
+        retention-days: 14
                
   
