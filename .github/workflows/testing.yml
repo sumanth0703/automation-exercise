@@ -51,8 +51,6 @@ jobs:
         with:
           #name: Coverage-Report
           path: .coverage
-      - name: "Run coverage"    
-        run: coverage report
       - name: "Converting to xml"
         run: coverage xml
         #retention-days: 14
