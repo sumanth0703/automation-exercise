@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Coverage-Report
-          path: .coverage
+          path: .Coverage-Report
           retention-days: 1
   coverage_report:
     needs: test
@@ -51,7 +51,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Coverage-Report
-          path: .coverage
+          path: .Coverage-Report
       - name: "Run coverage"    
         run: coverage report
       - name: "Converting to xml"
