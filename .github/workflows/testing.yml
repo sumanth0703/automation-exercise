@@ -58,7 +58,8 @@ jobs:
       - name: "Adding converted report"
         uses: actions/upload-artifact@v2
         with:
-          name: Coverage-Report.xml
+          name: Coverage-Report
+          path: Coverage-Report.xml
           retention-days: 14
                
   
