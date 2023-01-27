@@ -3,9 +3,14 @@ name: Testing workflow
 on: [push, pull_request]
 
 jobs:
-  print-hello:
+  style_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: python -c "print('Hello GitHub Actions')"
+        with:
+          python-version: '3.x'
+      - name: "Install style checker"
+        run: pip install black
+      - name: "Run style check"
+        run: black --check .
