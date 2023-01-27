@@ -49,7 +49,7 @@ jobs:
       - name: "Recover the coverage report from .coverage"
         uses: actions/download-artifact@v2
         with:
-          name: Coverage-Report
+          #name: Coverage-Report
           path: .coverage
       - name: "Run coverage"    
         run: coverage report
