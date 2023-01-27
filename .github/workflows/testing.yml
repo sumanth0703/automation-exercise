@@ -38,6 +38,7 @@ jobs:
           path: .coverage
           retention-days: 1
   coverage_report:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -49,8 +50,10 @@ jobs:
       - name: "Recover the coverage report from .coverage"
         uses: actions/download-artifact@v2
         with:
-          #name: Coverage-Report
+          name: Coverage-Report
           path: .coverage
+      - name: "Run coverage"    
+        run: coverage report
       - name: "Converting to xml"
         run: coverage xml
         #retention-days: 14
